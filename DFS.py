@@ -47,19 +47,27 @@ def DFS_algo():
                 print(i)
             break
 
-        for j, h in enumerate(notvisited):
-            if h == step:
-                notvisited.pop(j)
+        for l, y in enumerate(maze_cords):
+            if y == step:
+                num.append(l - 1)
+                num.append(l + len(maze))
+                num.append(l + 1)
+                num.append(l - len(maze))
                 break
-            for k in j:
-                for i in maze_cords[k]:
-                    if i in notvisited:
-                        stack.append([i])
-                        if maze[i[0]][i[1]] != 'S' and maze[i[0]][i[1]] != 'S' and maze[i[0]][i[1]] != 'G':
-                            maze[i[0]][i[1]] = 'W'
 
-            time.sleep(1)
-            for i in maze:
-                print(i, end='\n', flush=True)
+        for k in num:
+            for i in maze_cords[k]:
+                if i in notvisited:
+                    stack.append([i])
+                    if maze[i[0]][i[1]] != 'S' and maze[i[0]][i[1]] != 'S' and maze[i[0]][i[1]] != 'G':
+                        maze[i[0]][i[1]] = 'W'
+                    for j, h in enumerate(notvisited):
+                        if h == i:
+                            notvisited.pop(j)
+                            break
+
+        time.sleep(1)
+        for i in maze:
+            print(i, end='\n', flush=True)
 
 DFS_algo()
